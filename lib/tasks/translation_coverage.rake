@@ -5,10 +5,10 @@ namespace :transdifflation do
 
   def get_coverage_rate(from_locale, to_locale)
     #this will access translations method, that is protected in BackEnd in I18n
-    
+
     #Reading config  file
     search_locations = %w[config/transdifflation.yml transdifflation.yml]
-    
+
     file_task_config = nil
     search_locations.each do |path| #Take config file from these locations
       abs_path = File.expand_path(path, Rails.root)
@@ -21,7 +21,7 @@ namespace :transdifflation do
     raise Transdifflation::ConfigFileNotFound if file_task_config.nil?
 
     paths_ignored =  YAML.load_file(file_task_config).symbolize![:ignore_paths]
-    
+
     if paths_ignored
       I18n.reload!
       paths_ignored.each {|ignored |

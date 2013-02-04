@@ -99,6 +99,11 @@ describe :get_transdifflation_from_file do
     ::Rails.stub(:root).and_return('/rails')
   end
 
+  it 'should return false and warn user if source file does not exist' do
+    expect { @comparer.get_transdifflation_from_file(@tag_name, 'this file does not exist' , @from_locale, @to_locale) }.to_not raise_error(ArgumentError)
+  end
+
+
   it 'should call get_first_time_file if the files does not exist' do
     #We actually don't care about basename, and we want to generate a testfile in our tests
     File.stub(:basename).and_return('/dir/file_or_something')

@@ -70,14 +70,17 @@ module Transdifflation
       from_locale ||= I18n.default_locale
       to_locale ||= I18n.locale
 
+      if !File.exists? path_to_yaml_relative_from_rails_root
+        puts "Target file '#{path_to_yaml_relative_from_rails_root}' does not exist!! ************** Skipping **************"
+        return false
+      end
+
       yml_source_content = YAMLReader.read_YAML_from_pathfile(path_to_yaml_relative_from_rails_root)
       puts "Loaded YAML content from file '#{path_to_yaml_relative_from_rails_root}'"
 
       #build the file name in our host
       filename_in_SRC = File.basename(path_to_yaml_relative_from_rails_root )
-      host_target_filename = filename_in_SRC.gsub(/-?#{from_locale}\./) do |match_s|
-        match_s.sub("#{from_locale}", "#{to_locale}")
-      end
+      host_target_filename = filename_in_SRC.gsub(/-?#{from_locale}\./) { |match_s| match_s.sub("#{from_locale}", "#{to_locale}")}
 
       #The folder is created if doesn't exist
       if !File.directory?("config/locales/#{to_locale}")
@@ -247,7 +250,7 @@ module Transdifflation
       if( added_diff_hash.length > 0 || removed_diff_hash.length > 0 )
         diff_file = File.join(File.dirname(host_target_file), "#{File.basename(host_target_file)}.diff")
         diff_file_stream = File.new(diff_file, "w+:UTF-8")
-        begin           
+        begin
           if (added_diff_hash.length > 0)
             diff_file_stream.write("ADDED KEYS (Keys not found in your file, founded in source file) ********************\n")
             diff_file_stream.write(YAMLWriter.to_yaml(added_diff_hash))  #we can't use YAML#dump due to issues wuth Utf8 chars
@@ -294,7 +297,7 @@ module Transdifflation
           target[source_key_translated] = Hash.new if(!target.has_key? (source_key_translated))  #to continue trace, otherwise, node will not exist in next iteration
           generate_added_diff(source_value, target[source_key_translated], added_diff_hash, key_trace, from_locale, to_locale, add_NOT_TRANSLATED) #recursively call
         else #it's a leaf node
-
+          target = {old_key: target} if !target.is_a? Hash
           if !target.has_key? (source_key_translated)
             added_diff_hash_positioned = added_diff_hash #pointer to added_diff_hash
             key_trace.each do |key|  #add the keys if necessary on the accurate level
