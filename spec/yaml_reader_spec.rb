@@ -25,9 +25,9 @@ describe :YAMLReader do
       # Stubbing File to make it exist
       File.stub(:file?).and_return(true)
       ::Rails.should_receive(:root).and_return('/rails')
+      YAML.stub(:load_file).and_return(false)
 
-
-      expect {Transdifflation::YAMLReader.read_YAML_from_filesystem('whatever')}.to_not raise_error(ArgumentError)
+      expect {Transdifflation::YAMLReader.read_YAML_from_filesystem('whatever')}.to_not raise_error
     end
   end
 
@@ -47,7 +47,17 @@ describe :YAMLReader do
       a_path = 'README.md'
       Transdifflation::YAMLReader.stub(:get_YAML_content_from_YAML_file).and_return(':a => 2')
 
-      expect {Transdifflation::YAMLReader.read_YAML_from_gem(a_gem, a_path)}.to_not raise_error(ArgumentError)
+      expect {Transdifflation::YAMLReader.read_YAML_from_gem(a_gem, a_path)}.to_not raise_error
+    end
+
+    it 'should read correct gem path when given noisy output from bundle show #{gem_name}' do
+      Object.stub(:`).and_return("Noisy multiline output\n/path/to/gem")
+      a_gem = 'one_random_gem'
+      a_path = 'random.yml'
+      File.should_receive(:file?).with('/path/to/gem/random.yml').and_return(true)
+      YAML.stub(:load_file).and_return(false)
+
+      expect {Transdifflation::YAMLReader.read_YAML_from_gem(a_gem, a_path)}.to_not raise_error
     end
   end
 
@@ -65,7 +75,7 @@ describe :YAMLReader do
       a_path = 'README.md'
 
       Transdifflation::YAMLReader.stub(:get_YAML_content_from_YAML_file).and_return(':a => 2')
-      expect {Transdifflation::YAMLReader.read_YAML_from_pathfile(a_path)}.to_not raise_error(ArgumentError)
+      expect {Transdifflation::YAMLReader.read_YAML_from_pathfile(a_path)}.to_not raise_error
     end
   end
 

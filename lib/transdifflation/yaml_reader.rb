@@ -10,7 +10,7 @@ module Transdifflation
 
       #get where the gem is localized
 
-      gem_SRC =`bundle show #{gem_name}`.chomp
+      gem_SRC =`bundle show #{gem_name}`.chomp.split("\n").last
 
       raise ArgumentError.new("Gem '#{gem_name}' not installed") if ($?.to_i != 0)  #get return code and check if is different from zero
 

@@ -79,6 +79,7 @@ module Transdifflation
         end
 
         #Grouped tasks
+        tasks_config[:grouped_tasks] ||= {}
         tasks_config[:grouped_tasks].each_pair do |key, value|
 
           value.map! do |item|

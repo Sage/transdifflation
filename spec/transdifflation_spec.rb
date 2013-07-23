@@ -100,7 +100,7 @@ describe :get_transdifflation_from_file do
   end
 
   it 'should return false and warn user if source file does not exist' do
-    expect { @comparer.get_transdifflation_from_file(@tag_name, 'this file does not exist' , @from_locale, @to_locale) }.to_not raise_error(ArgumentError)
+    expect { @comparer.get_transdifflation_from_file(@tag_name, 'this file does not exist' , @from_locale, @to_locale) }.to_not raise_error
   end
 
 
@@ -186,7 +186,7 @@ describe :comparer_common_methods do
     File.stub(:file?).and_return(false)
 
     #now we must stub File.open, write and close in order to avoid fails on get_first_time_file
-    mock_file = mock("File")
+    mock_file = double("File")
     mock_file.stub(:write).and_return(nil)
     mock_file.stub(:close).and_return(nil)
     File.stub(:open).and_return(mock_file)
@@ -217,7 +217,7 @@ describe :comparer_common_methods do
     Transdifflation::YAMLReader.stub(:read_YAML_from_pathfile).and_return( {es: {:dorothy => "Dorothy"}})
 
     #now we must stub File.open, write and close in order to avoid fails on get_first_time_file
-    mock_file = mock("File")
+    mock_file = double("File")
     mock_file.stub(:write).and_return(nil)
     mock_file.stub(:close).and_return(nil)
     File.stub(:open).and_return(mock_file)
@@ -238,7 +238,7 @@ describe :comparer_common_methods do
     File.stub(:file?).and_return(true)
 
     #now we must stub File.open, write and close in order to avoid fails on get_first_time_file
-    mock_file = mock("File")
+    mock_file = double("File")
     mock_file.stub(:write).and_return(nil)
     mock_file.stub(:close).and_return(nil)
     File.stub(:open).and_return(mock_file)
@@ -263,7 +263,7 @@ describe :comparer_common_methods do
     File.stub(:file?).and_return(false)
 
     #now we must stub File.open, write and close in order to avoid fails on get_first_time_file
-    mock_file = mock("File")
+    mock_file = double("File")
     mock_file.stub(:write).and_return(nil)
     mock_file.stub(:close).and_return(nil)
     File.stub(:open).and_return(mock_file)
@@ -287,7 +287,7 @@ describe :comparer_common_methods do
     File.stub(:file?).and_return(false)
 
     #now we must stub File.open, write and close in order to avoid fails on get_first_time_file
-    mock_file = mock("File")
+    mock_file = double("File")
     mock_file.stub(:write).and_return(nil)
     mock_file.stub(:close).and_return(nil)
     File.stub(:open).and_return(mock_file)

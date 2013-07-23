@@ -1,4 +1,5 @@
 require 'rails'
+require 'fileutils'
 
 
 namespace :transdifflation do
@@ -6,7 +7,7 @@ namespace :transdifflation do
   def get_differences (from_locale, to_locale)
 
     #this will access translations method, that is protected in BackEnd in I18n
-    
+
     #Reading config  file
     search_locations = %w[config/transdifflation.yml transdifflation.yml]
 
@@ -23,7 +24,7 @@ namespace :transdifflation do
     raise Transdifflation::ConfigFileNotFound if file_task_config.nil?
 
     paths_ignored =  YAML.load_file(file_task_config).symbolize![:ignore_paths]
-    
+
     if paths_ignored
       I18n.reload!
       paths_ignored.each {|ignored |
@@ -37,7 +38,7 @@ namespace :transdifflation do
     # do something with /Faker-/ to remove all Faker yamls from the backend
 
     hash_from_locale = translations[from_locale]
-    hash_to_locale = translations[to_locale]
+    hash_to_locale = translations[to_locale] || {}
 
     comparer = Transdifflation::Comparer.new
     differences = comparer.get_rest_of_translation(hash_from_locale, hash_to_locale, from_locale, to_locale)
@@ -57,6 +58,7 @@ namespace :transdifflation do
 
     if !differences.empty?
       missing_translations_file = File.join( Rails.root, "config/locales/#{to_locale}/missing_translations.yml.diff")
+      FileUtils.mkdir_p(File.dirname(missing_translations_file))
       missing_translations_stream = File.new(missing_translations_file, "w+:UTF-8")
       begin
         missing_translations_stream.write("#These are the missing translations Transdifflation found for you\n")
