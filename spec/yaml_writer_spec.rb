@@ -5,7 +5,12 @@ describe :YAMLWriter do
   describe :to_yaml do
     it 'should convert to ya2yaml format an input hash' do
       hashy = {:en=>{:date=>{:formats=>{:default=>"%d/%m/%Y", :short=>"%d %b"}}}}
-      Transdifflation::YAMLWriter.to_yaml(hashy).should be == ":en:\n  :date:\n    :formats:\n      :default: ! '%d/%m/%Y'\n      :short: ! '%d %b'"
+      if RUBY_VERSION == '1.9.3'
+        result = ":en:\n  :date:\n    :formats:\n      :default: ! '%d/%m/%Y'\n      :short: ! '%d %b'"
+      else
+        result = ":en:\n  :date:\n    :formats:\n      :default: '%d/%m/%Y'\n      :short: '%d %b'"
+      end
+      Transdifflation::YAMLWriter.to_yaml(hashy).should be == result
     end
 
     it 'should convert to ya2yaml format with just one term' do
