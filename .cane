@@ -1,0 +1,4 @@
+--abc-exclude Transdifflation::Comparer#generate_diff_file
+--abc-exclude Transdifflation::Comparer#get_transdifflation_from_gem
+--abc-exclude Transdifflation::Comparer#get_transdifflation_from_file
+--abc-exclude Transdifflation::Comparer#generate_added_diff
