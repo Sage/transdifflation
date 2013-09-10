@@ -38,7 +38,7 @@ module Transdifflation
       puts "Loaded YAML content from gem '#{gem_name}', file '#{path_to_yaml_in_gem}'"
 
       #build the file name in our host
-      filename_in_gem_SRC = File.basename( path_to_yaml_in_gem )      
+      filename_in_gem_SRC = File.basename( path_to_yaml_in_gem )
       host_target_filename = filename_in_gem_SRC.gsub(/-?#{from_locale}\./) do |match_s|
         match_s.sub("#{from_locale}", "#{to_locale}")
       end

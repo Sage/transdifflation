@@ -1,5 +1,7 @@
 build :default do
-  yard :arguments => '-r YardREADME.md', :coverage => 100
+  yard :arguments => '-r README.md', :coverage => 100
+  cane :max_width => 300
+  task :flay, :exclude => '^\.\/spec\/', :max => 314
+  task :flog, :exclude => '^\.\/spec\/', :max => 55.4, :average => 16, :methods => true
   rspec :coverage => 100
-  # cane :max_width => 300 #still ABC complexity probs
 end

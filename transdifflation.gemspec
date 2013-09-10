@@ -19,15 +19,23 @@ Gem::Specification.new do |gem|
   gem.add_dependency('rails', '~> 3.2.8')
   gem.add_dependency('ya2yaml')
 
-  gem.add_development_dependency 'rspec', '>= 2.8.0'
+  gem.add_development_dependency 'cane'
+  gem.add_development_dependency 'flog'
+  gem.add_development_dependency 'flay'
+  gem.add_development_dependency 'fudge'
   gem.add_development_dependency 'guard-rspec'
-  gem.add_development_dependency 'yard'
-  gem.add_development_dependency 'redcarpet'
-  gem.add_development_dependency 'RedCloth'
-  gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'rb-inotify'
+  gem.add_development_dependency 'guard-sass'
   gem.add_development_dependency 'libnotify'
   gem.add_development_dependency 'pry'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rb-fsevent'
+  gem.add_development_dependency 'rb-inotify'
+  gem.add_development_dependency 'redcarpet'
+  gem.add_development_dependency 'RedCloth'
+  gem.add_development_dependency 'rspec', '>= 2.8.0'
+  gem.add_development_dependency 'rspec-rails'
+  gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'yard'
 end
 
 
