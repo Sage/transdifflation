@@ -1,4 +1,4 @@
-# Transdifflation [![travis-ci](https://secure.travis-ci.org/Sage/transdifflation.png)](http://travis-ci.org/#!/Sage/transdifflation) [![Dependency Status](https://gemnasium.com/Sage/transdifflation.png)](https://gemnasium.com/Sage/transdifflation) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Sage/transdifflation) [![Gem Version](https://badge.fury.io/rb/transdifflation.png)](http://badge.fury.io/rb/transdifflation)
+# Transdifflation [![Build Status](https://travis-ci.org/Sage/transdifflation.svg?branch=master)](https://travis-ci.org/Sage/transdifflation) [![Maintainability](https://api.codeclimate.com/v1/badges/2a7c350b06fbba32f239/maintainability)](https://codeclimate.com/github/Sage/transdifflation/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2a7c350b06fbba32f239/test_coverage)](https://codeclimate.com/github/Sage/transdifflation/test_coverage) [![Dependency Status](https://gemnasium.com/Sage/transdifflation.png)](https://gemnasium.com/Sage/transdifflation) [![Gem Version](https://badge.fury.io/rb/transdifflation.png)](http://badge.fury.io/rb/transdifflation)
 
 What is Transdifflation? Transdifflation is a portmanteau of 'Translation' and 'Diff'.  It helps you to manage the translation of Rails i18n strings that appear in your application and the Ruby Gems it includes.
 
@@ -7,7 +7,7 @@ Then you can merge it. It is designed to detect changes between versions. For no
 
 Also, it has three new rake tasks to provide information to you about missing translations between two locales, and continuous integration support.
 
-It never changes your source files (unless they don't yet exist, in which case they are created for you). 
+It never changes your source files (unless they don't yet exist, in which case they are created for you).
 
 ## Installation
 
@@ -52,7 +52,7 @@ tasks:
     }
   }
 grouped_tasks:
-  task_group_name: 
+  task_group_name:
     - task_name1
     - task_name2
 
@@ -68,7 +68,7 @@ These nodes generates rake tasks. There are two types of tasks:
 
 *   type **file**: When it rans, it looks for the file in 'file_path_from_rails_root' is installed. It uses from_locale and to_locale to translate names and keys inside yaml. Tag_name is used to name target file in our host.
 
-Also, you can create grouped tasks in a node called 'grouped_taks'. Task ```transdifflation:all``` is automatically generated.  
+Also, you can create grouped tasks in a node called 'grouped_taks'. Task ```transdifflation:all``` is automatically generated.
 
 Execute ```rake -T``` to determine sucess of config file. Your tasks should appear there, under namespace ```transdifflation:``
 
@@ -93,7 +93,7 @@ you don't what to check
 
 ```rake transdifflation:coverage[from_locale,to_locale]``` gives you
 information and statistics of translations. You can configure
-ignore_paths too. 
+ignore_paths too.
 
 
 
