@@ -1,0 +1,22 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+    > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - "./cc-test-reporter before-build"
+after_script:
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+env:
+  global:
+    secure: lfXbdH4lM0UlRmjffKqFNZcNSfZgtETuP5tQUMq46J1z16Smw00SHQHLKyUbjwpje/ow/L2J8SJzIUv6MYhIqXLUFb/e3PaoUE9O1WUL4ZczYWhCixIq557S+zMPfhEIShUBmBiV+JIJ8MMx2u58z8JdrMamYdAckZ6NaB0pZvg=
+deploy:
+  provider: rubygems
+  api_key:
+    secure: R7ai4UMcXdUBRCFGxPDDP/QCogUQ2BG3658SjXB2NNWS7Rm1Sq9NiOCZC++/UzFsruJY4Z0KJFADb0Jwb9NVifikxgdhG2wcyyFOYY0w2qwsl3rEE1e014F8ftsL5NLYVX0MZqT2F+SMaff+SZJQ9DIknhqLKGR402CiqPE+wB4=
+  gem: transdifflation
+  on:
+    tags: true
+    repo: Sage/transdifflation
+    condition: "$TRAVIS_RUBY_VERSION == 1.9.3"

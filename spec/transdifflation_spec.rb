@@ -24,10 +24,12 @@ describe :get_transdifflation_from_gem do
     ::Rails.stub(:root).and_return('/rails')
   end
 
+  let(:testfile) { File.join(File.dirname(__FILE__), '/assets/testfile') }
+
   it 'should call get_first_time_file if the files does not exist' do
     #We actually don't care about basename, and we want to generate a testfile in our tests
     File.stub(:basename).and_return('/dir/file_or_something')
-    File.stub(:join).and_return(File.join(File.dirname(__FILE__), '/assets/testfile'))
+    allow(File).to receive(:join).and_return(testfile)
 
     File.stub(:gsub).and_return('idontcare')
     File.stub(:directory?).and_return(true)
@@ -47,7 +49,7 @@ describe :get_transdifflation_from_gem do
 
     #We actually don't care about basename, and we want to generate a testfile in our tests
     File.stub(:basename).and_return('/dir/file_or_something')
-    File.stub(:join).and_return(File.join(File.dirname(__FILE__), '/assets/testfile'))
+    allow(File).to receive(:join).and_return(testfile)
 
     File.stub(:gsub).and_return('idontcare')
     File.stub(:directory?).and_return(true)
