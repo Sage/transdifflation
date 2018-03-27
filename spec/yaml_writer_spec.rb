@@ -8,7 +8,7 @@ describe :YAMLWriter do
       if RUBY_VERSION == '1.9.3'
         result = ":en:\n  :date:\n    :formats:\n      :default: ! '%d/%m/%Y'\n      :short: ! '%d %b'"
       else
-        result = ":en:\n  :date:\n    :formats:\n      :default: '%d/%m/%Y'\n      :short: '%d %b'"
+        result = ":en:\n  :date:\n    :formats:\n      :default: \"%d/%m/%Y\"\n      :short: \"%d %b\""
       end
       Transdifflation::YAMLWriter.to_yaml(hashy).should be == result
     end

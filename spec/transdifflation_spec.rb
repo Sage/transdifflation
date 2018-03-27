@@ -271,7 +271,7 @@ describe :comparer_common_methods do
     File.stub(:open).and_return(mock_file)
 
     @comparer.get_transdifflation_from_gem(@gem_name, @path_to_yaml_in_gem, @from_locale, @from_locale)
-    FileUtils.remove_dir("./spec/tempFolder").should == 0
+    expect(FileUtils.remove_dir("./spec/tempFolder").length).to eq(0)
   end
 
   it "should create a folder in get_transdifflation_from_file when it doesn't exist" do
@@ -295,7 +295,7 @@ describe :comparer_common_methods do
     File.stub(:open).and_return(mock_file)
 
     @comparer.get_transdifflation_from_file(@gem_name, @path_to_yaml_in_gem, @from_locale, @from_locale)
-    FileUtils.remove_dir("./spec/tempFolder").should == 0
+    expect(FileUtils.remove_dir("./spec/tempFolder").length).to eq(0)
   end
 end
 
